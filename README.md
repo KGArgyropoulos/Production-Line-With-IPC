@@ -7,9 +7,6 @@ We have 3 types of fitments,hence 3 sections of production line and x(input) pro
 The production line schema is shown above:
 ![alt text](https://github.com/KGArgyropoulos/Production-Line-With-IPC/blob/master/prodLine.png)
 
-To achieve this, we use a model with **semaphores** and **shared memory**.\
-More on the implementation techniques and the algorithm used later.
-
 - Compilation: make
 - Remove object files: make clean
 - Execution: ./simulator x
@@ -20,3 +17,8 @@ More on the implementation techniques and the algorithm used later.
 	* Control: This stage gets fitments ready for assemblement. Fitments get passed to the assembelement stage, when there is at least one of every type available. In other words, the final product is made from 1 fitment of typeA, 1 of typeB and 1 of typeC.When all 3 of them are in the controller's stage, then they can proceed to the assemblement. There's also a delay, similar to the paint shop's.
 	* Assemblement: The product gets assigned a new id, resulting from the 3 ids of its components. The time spent there is also fixed.
 - At the end of the program, the average delay for the paint shop and the average delay between the first fitment and the final product are calculated.
+- Implementation:
+	* To implement the production line, we need:
+		* Communication between the processes(IPC), which is achieved by using shared memory structs. These variables, which are initialized at simulator.c, carry information of the fitment from one stage towards another and help us calculate final statistics.
+		* Process synchonization, which is achieved by using binary semaphores. They are also initialized at simulator.c.
+		* Signals, for process synchronization, as well.
